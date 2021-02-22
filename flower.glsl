@@ -17,9 +17,12 @@ void main(void){
   for(int i = 0; i < 24; i++){
     // int型からfloat型へ変換
     float i_float = float(i + 1);
-    float velocity = i_float / 10.0;
+    // float velocity = i_float / 10.0;
+    float rad = 0.628318;
     float orbitRadius = 1.0 / 6.0;
-    vec2 origin = normCoord + vec2(cos(u_time * 0.5 * velocity), sin(u_time * velocity)) * orbitRadius;
+    float sin = sin(u_time + i_float * rad);
+    float cos = cos(u_time + i_float * rad);
+    vec2 origin = normCoord + vec2(cos, sin) * orbitRadius;
     particle += 0.002 / abs(length(origin) - 0.4);
   }
 
