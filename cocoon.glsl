@@ -6,6 +6,12 @@ void main(void){
   /* ----------------------------------- 正規化 ---------------------------------- */
   vec2 normCoord = (gl_FragCoord.xy * 2.0 - u_resolution) / min(u_resolution.x, u_resolution.y);
   vec2 gridNormCoord = mod(normCoord, 0.6) - 0.3;
+  float sin_t = sin(u_time);
+  float cos_t = cos(u_time);
+  gridNormCoord *= mat2(
+    1.0, 0.0,
+    0.0, 1.0
+  );
   /* ---------------------------------- color --------------------------------- */
   float red = abs(sin(u_time));
   float green = abs(sin(u_time * 1.1));
