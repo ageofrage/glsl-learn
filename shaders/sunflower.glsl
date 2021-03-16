@@ -24,19 +24,19 @@ void main(void){
     sin(u_time), cos(u_time)
   );
   /* ---------------------------------- color --------------------------------- */
-  vec3 destColor = vec3(0.05, 0.05, 0.0);
+  vec3 destColor = vec3(0.05);
 
   /* --------------------------------- パーティクル --------------------------------- */ 
-  float particle = 0.0;
+  vec3 particle = vec3(0);
   for(int i = 1; i <= 300; i++){
     // int型からfloat型へ変換
     float i_float = float(i + 1);
     float i_rad = golden_rad * i_float;
-    float orbitRadius = sqrt(i_float) / sqrt(300.0) * sin(u_time * 0.3) * 2.0;
+    float orbitRadius = sqrt(i_float) / sqrt(300.0) * sin(u_time * 0.3) * sqrt(2.0);
     vec2 origin = gridNormCoord + vec2(cos(i_rad), sin(i_rad)) * orbitRadius;
-    particle += 0.025 / abs(length(origin));
+    particle += 0.05 / abs(length(origin)) * vec3(mod(i_float, 13.0) / 13.0, mod(i_float, 17.0) / 17.0 ,mod(i_float, 11.0) / 11.0);
   }
 
 /* ----------------------------------- 出力 ----------------------------------- */
-  gl_FragColor = vec4(vec3(destColor * particle), 0.8);
+  gl_FragColor = vec4((destColor * particle), 1.0);
 }
